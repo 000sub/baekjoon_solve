@@ -22,7 +22,7 @@
 
 <p>위의 그림에서 4번째 구간으로 개똥벌레가 날아간다면 파괴해야하는 장애물의 수는 총 여덟개이다. (4번째 구간은 길이가 3인 석순과 길이가 4인 석순의 중간지점을 말한다)</p>
 
-<p style="text-align: center;"><img alt="" src="" style="width: 292px; height: 108px;"></p>
+<p style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/bfcbb94f-0e15-4ff9-b2ef-43e07c7ee503/-/preview/" style="width: 292px; height: 108px;"></p>
 
 <p>하지만, 첫 번째 구간이나 다섯 번째 구간으로 날아간다면 개똥벌레는 장애물 일곱개만 파괴하면 된다.</p>
 
