@@ -16,12 +16,10 @@ else:
 
     dp[0] = L[0]
     dp[1] = L[0]+L[1]
-    dp[2] = max(dp[1],max(L[0]+L[2], L[1]+L[2]))
+    dp[2] = max(dp[1], L[0]+L[2], L[1]+L[2])
 
     for i in range(3, n):
-        dp[i] = max(dp[i-2]+L[i],\
+        dp[i] = max(dp[i-1], dp[i-2]+L[i],\
                     dp[i-3]+L[i-1]+L[i])
 
-        dp[i] = max(dp[i-1],dp[i])
-                    
     print(dp[-1])
