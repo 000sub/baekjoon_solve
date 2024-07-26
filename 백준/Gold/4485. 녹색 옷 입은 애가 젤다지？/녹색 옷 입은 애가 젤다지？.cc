@@ -42,8 +42,6 @@ int main() {
 
 			if (dist[x][y] < cost) continue;
 
-			dist[x][y] = cost;
-
 			if (x == n - 1 && y == n - 1) {
 				ans = min(ans, cost);
 				continue;
