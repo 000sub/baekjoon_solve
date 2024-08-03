@@ -1,45 +1,33 @@
-#include <iostream>
-#include <algorithm>
-#define MAX 1000000
+#include <bits/stdc++.h>
+
+#define PII pair<int,int>
+#define PFF pair<float, float>
+
 using namespace std;
+typedef long long ll;
 
+int dp[10001];
+int coins[101];
 
-int n,k;
-int arr[101], dp[101][10001];
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(0); cout.tie(0);
 
-int main(){
-	ios::sync_with_stdio(false);
-	cin.tie(0);
-	cout.tie(0);
+    int n, k;
+    cin >> n >> k;
 
-	
-	
-	cin>>n>>k;
-	
-	for (int i=1;i<=n;i++){
-		cin>>arr[i];
-	}
-	
-	for (int i=0;i<=n;i++){
-		for (int j=0;j<=k;j++){
-			dp[i][j] = MAX;
-		}
-	}
-	
-	for (int i=1;i<=n;i++){
-		dp[i][0] = 0;
-		for (int j=0; j<=k; j++){
-			if (i<n) dp[i+1][j] = min(dp[i+1][j], dp[i][j]);
-			
-			if (j+arr[i] <= k){
-				dp[i][j+arr[i]] = min(dp[i][j]+1, dp[i][j+arr[i]]);
-			}
-		}
-	}
-	
-	if (dp[n][k] == MAX) cout<<-1<<'\n';
-	else cout<<dp[n][k]<<'\n';
-	
-	
-	return 0;
+    for (int i = 0; i < n; i++) cin >> coins[i];
+
+    fill(dp, dp + k + 1, 1e9);
+
+    dp[0] = 0;
+    for (int i = 0; i < n; i++) {
+        for (int j = coins[i]; j <= k; j++) {
+            dp[j] = min(dp[j], dp[j - coins[i]] + 1);
+        }
+    }
+
+    dp[k] == 1e9 ? cout << -1 : cout << dp[k];
+
+    return 0;
 }
