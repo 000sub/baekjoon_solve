@@ -20,10 +20,11 @@ public class Main {
 
     private static void BFS(int x, int y) {
         Queue<Pos> queue = new LinkedList<>();
-        boolean[][] isAlly = new boolean[N][N];
+        List<Pos> posList = new ArrayList<>();
 
         queue.add(new Pos(x, y));
-        isAlly[x][y] = true;
+        posList.add(new Pos(x, y));
+        visited[x][y] = true;
         int cnt = 1;
         int sum = board[x][y];
 
@@ -33,15 +34,16 @@ public class Main {
                 int nx = cur.x + dx[d];
                 int ny = cur.y + dy[d];
 
-                if (nx < 0 || ny < 0 || nx > N - 1 || ny > N - 1 || visited[nx][ny] || isAlly[nx][ny]) continue;
+                if (nx < 0 || ny < 0 || nx > N - 1 || ny > N - 1 || visited[nx][ny]) continue;
 
                 int gap = Math.abs(board[cur.x][cur.y] - board[nx][ny]);
 
                 if (L <= gap && gap <= R) {
-                    isAlly[nx][ny] = true;
+                    visited[nx][ny] = true;
                     queue.add(new Pos(nx, ny));
                     sum += board[nx][ny];
                     cnt++;
+                    posList.add(new Pos(nx, ny));
                 }
             }
         }
@@ -49,16 +51,9 @@ public class Main {
         if (cnt == 1) return;
 
         int val = sum / cnt;
-
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                if (isAlly[i][j]) {
-                    board[i][j] = val;
-                    visited[i][j] = true;
-                }
-            }
+        for (Pos pos : posList) {
+            board[pos.x][pos.y] = val;
         }
-
         moveOccurred = true;
     }
 
@@ -84,16 +79,16 @@ public class Main {
         while (moveOccurred) {
             moveOccurred = false;
 
-            for (boolean[] row : visited) {
-                Arrays.fill(row, false);
-            }
-
             for (int i = 0; i < N; i++) {
                 for (int j = 0; j < N; j++) {
                     if (!visited[i][j]) BFS(i, j);
                 }
             }
             ans++;
+
+            for (boolean[] row : visited) {
+                Arrays.fill(row, false);
+            }
         }
 
 
