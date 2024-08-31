@@ -7,7 +7,7 @@ typedef long long ll;
 const int INF = 1e9;
 
 int n, m;
-PIII edges[200001];
+tuple<int, int, int> edges[200001];
 int parent[200001];
 
 int Find(int x) {
@@ -34,29 +34,19 @@ int main(void) {
 	while (1) {
 		cin >> m >> n;
 		if (m == 0 && n == 0) break;
-		int totalCost = 0;
 		for (int i = 0; i < m; i++) parent[i] = i;
-		for (int i = 0, a, b, c; i < n; i++) {
-			cin >> a >> b >> c;
-			totalCost += c;
-			edges[i] = { c, {a,b} };
-		}
-		sort(edges, edges + n);
-
-		int cnt = 0, minCost = 0;
 		for (int i = 0; i < n; i++) {
-			int cost = edges[i].first;
-			int a = edges[i].second.first;
-			int b = edges[i].second.second;
-
-			if (Union(a, b)) {
-				cnt++;
-				minCost += cost;
-			}
-
-			if (cnt == m - 1) break;
+			auto &[c, a, b] = edges[i];
+			cin >> a >> b >> c;
 		}
-		cout << totalCost - minCost << '\n';
+		sort(edges, edges + n, [](tuple<int, int, int>& a, tuple<int, int, int>& b) {return get<0>(a) < get<0>(b); });
+
+		int ans = 0;
+		for (int i = 0; i < n; i++) {
+			auto &[c, a, b] = edges[i];
+			if (!Union(a, b)) ans += c;
+		}
+		cout << ans << '\n';
 	}
 	
 	return 0;
