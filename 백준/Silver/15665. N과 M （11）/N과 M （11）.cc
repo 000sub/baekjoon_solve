@@ -6,21 +6,18 @@ using namespace std;
 typedef long long ll;
 const int INF = 1e9;
 
-int N, M, cnt[10001];
+int N, M;
 vector<int> v, ans;
 
 
-void bt(int idx) {
+void bt(string s, int idx) {
 	if (idx == M) {
-		for (int i : ans) cout << i << " ";
-		cout << '\n';
+		cout << s << '\n';
 		return;
 	}
 
 	for (auto& elem : v) {
-		ans.push_back(elem);
-		bt(idx + 1);
-		ans.pop_back();
+		bt(s + to_string(elem) + " ", idx + 1);
 	}
 }
 
@@ -33,10 +30,10 @@ int main(void) {
 	int temp;
 	for (int i = 0; i < N; i++) {
 		cin >> temp;
-		if (cnt[temp] == 0) v.push_back(temp);
-		cnt[temp]++;
+		v.push_back(temp);
 	}
 	sort(v.begin(), v.end());
-	bt(0);
+	v.erase(unique(v.begin(), v.end()), v.end());
+	bt("", 0);
 	return 0;
 }
