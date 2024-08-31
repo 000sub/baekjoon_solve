@@ -7,7 +7,7 @@ typedef long long ll;
 const int INF = 1e9;
 
 int n, m;
-vector<PIII> v;
+PIII edges[200001];
 int parent[200001];
 
 int Find(int x) {
@@ -39,15 +39,15 @@ int main(void) {
 		for (int i = 0, a, b, c; i < n; i++) {
 			cin >> a >> b >> c;
 			totalCost += c;
-			v.push_back({ c, {a,b} });
+			edges[i] = { c, {a,b} };
 		}
-		sort(v.begin(), v.end());
+		sort(edges, edges + n);
 
 		int cnt = 0, minCost = 0;
 		for (int i = 0; i < n; i++) {
-			int cost = v[i].first;
-			int a = v[i].second.first;
-			int b = v[i].second.second;
+			int cost = edges[i].first;
+			int a = edges[i].second.first;
+			int b = edges[i].second.second;
 
 			if (Union(a, b)) {
 				cnt++;
@@ -57,7 +57,6 @@ int main(void) {
 			if (cnt == m - 1) break;
 		}
 		cout << totalCost - minCost << '\n';
-		v.clear();
 	}
 	
 	return 0;
