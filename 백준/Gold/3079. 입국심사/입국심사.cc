@@ -6,6 +6,7 @@ typedef long long ll;
 //typedef unsigned long long ll;
 
 int N, M;
+ll maxT;
 ll T[100001];
 
 
@@ -23,9 +24,9 @@ int main() {
 	cin.tie(0);
 
 	cin >> N >> M;
-	for (int i = 0; i < N; i++) cin >> T[i];
+	for (int i = 0; i < N; i++) cin >> T[i], maxT = max(maxT, T[i]);
 
-	ll lo = 0, hi = 1e18 + 1;
+	ll lo = 0, hi = maxT * M;
 
 	while (lo <= hi) {
 		ll mid = (lo + hi) / 2;
