@@ -7,7 +7,7 @@ typedef long long ll;
 int M;
 int op, x, w;
 
-map<int, int> ball_chest;
+unordered_map<int, int> ball_chest;
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(0);
