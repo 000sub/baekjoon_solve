@@ -4,7 +4,6 @@ using namespace std;
 int N, maxCnt = 0;
 string str;
 vector<string> v;
-set<string> used;
 map<string, vector<int>> MAP;
 int main() {
 	ios::sync_with_stdio(false);
@@ -14,16 +13,13 @@ int main() {
 	for (int i = 0; i < N; i++) {
 		cin >> str;
 		v.push_back(str);
-		if (used.count(str)) continue;
-		used.insert(str);
 
 		string temp = "";
 		
-
 		for (int j = 0; j < str.size(); j++) {
 			temp += str[j];
+			if (MAP.count(temp)) maxCnt = max(maxCnt, (int)temp.size());
 			MAP[temp].push_back(i);
-			if (MAP[temp].size() >= 2) maxCnt = max(maxCnt, (int)temp.size());
 		}
 	}
 
